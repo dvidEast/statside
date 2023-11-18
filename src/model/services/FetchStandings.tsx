@@ -8,7 +8,7 @@ class FetchStandings{
                 throw new Error('Network response was not ok');
             } 
             const standings = await response.json();
-            
+            console.log(standings)
             return standings;
         } catch (error) {
             console.error('Error fetching data:', error) 

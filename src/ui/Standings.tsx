@@ -1,17 +1,22 @@
 import canucks from '/team-logos/canucks-logo.png'
 import FetchStandings from '../model/services/FetchStandings';     
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
 
 export default function Standings() {
-    const [canucksGP, setCanucksGP] = useState(null);
+    const [canucksGP, setCanucksGP] = useState(0);
 
-    const fetchData = async () => {
-        const standings = new FetchStandings();
-        const standingsData = await standings.getStandings();
-        setCanucksGP(standingsData.standings[4].gamesPlayed);
-    }   
+    useEffect(() => {
+        const fetchData = async () => {
+            const standings = new FetchStandings();
+            const standingsData = await standings.getStandings();
+            setCanucksGP(standingsData.standings[1].goalDifferentialPctg);
+        }
 
-    console.log(canucksGP);
+        fetchData();
+    }, [])
+    
+    console.log(canucksGP)
     
     return(
         <div>
